@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/shared";
 import { RevealHeading } from "@/components/about/ui";
 import { PageHero } from "@/components/page-hero";
 import { cn } from "@/lib/utils";
-import type { BusinessCompany, BusinessPageData } from "@/lib/business-pages";
+import type { BusinessCompany, BusinessPageData } from "@/lib/content";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

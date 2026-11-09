@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jlsmiths
+      POSTGRES_PASSWORD: jlsmiths
+      POSTGRES_DB: jlsmiths
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

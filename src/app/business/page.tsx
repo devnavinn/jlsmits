@@ -8,6 +8,7 @@ import {
   BusinessOverviewIntro,
   CompanyLogos,
 } from "@/components/business/overview";
+import { getBusinessPages } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Our Businesses — JLSmith Group",
@@ -15,15 +16,17 @@ export const metadata: Metadata = {
     "Advanced materials, industrial solutions, technology, commerce and international operations: the businesses and companies of JLSmith Group.",
 };
 
-export default function BusinessesPage() {
+export default async function BusinessesPage() {
+  const pages = await getBusinessPages();
+
   return (
     <>
       <Navbar />
       <main className="flex-1">
         <BusinessOverviewHero />
-        <BusinessOverviewIntro />
-        <BusinessDirectory />
-        <CompanyLogos />
+        <BusinessOverviewIntro pages={pages} />
+        <BusinessDirectory pages={pages} />
+        <CompanyLogos pages={pages} />
         <Contact />
       </main>
       <Footer />

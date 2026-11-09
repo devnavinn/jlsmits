@@ -6,17 +6,20 @@ import { Innovation } from "@/components/sections/innovation";
 import { Insights } from "@/components/sections/insights";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
+import { getBusinessPages, getLatestArticles } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const [businesses, articles] = await Promise.all([getBusinessPages(), getLatestArticles(3)]);
+
   return (
     <>
       <Navbar />
       <main className="flex-1">
         <Hero />
         <About />
-        <Portfolio />
+        <Portfolio businesses={businesses} />
         <Innovation />
-        <Insights />
+        <Insights articles={articles} />
         <Contact />
       </main>
       <Footer />

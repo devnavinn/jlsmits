@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Database and admin panel
+
+Content (articles, businesses, legal pages) and contact messages live in Postgres, managed at `/admin`.
+
+```bash
+cp .env.example .env        # then set ADMIN_PASSWORD (12+ characters)
+docker compose up -d        # or point DATABASE_URL at any Postgres
+npm run db:deploy           # create the tables
+npm run db:seed             # add starting content and the first admin
+npm run dev
+```
+
+In production, set `DATABASE_URL`, `ADMIN_EMAIL` and `ADMIN_PASSWORD`, then run `npm run db:deploy` and `npm run db:seed` once. Re-running the seed never overwrites edits.

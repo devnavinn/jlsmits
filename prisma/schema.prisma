@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String
+  passwordHash   String
+  failedLogins   Int       @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  sessions       Session[]
+}
+
+model Session {
+  id        String    @id @default(cuid())
+  /// SHA-256 of the cookie token, so a database leak does not expose live sessions.
+  tokenHash String    @unique
+  userId    String
+  user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Article {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  category    String
+  excerpt     String        @default("")
+  /// Markdown.
+  body        String
+  coverImage  String
+  authorName  String?
+  authorRole  String?
+  authorImage String?
+  featured    Boolean       @default(false)
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, featured, publishedAt])
+}
+
+model Business {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  /// Name shown in the menu, home page tab and page heading.
+  label           String
+  brand           String
+  cardTitle       String
+  cardDescription String
+  cardImage       String
+  heroImage       String
+  heroAlt         String
+  heroPosition    String?
+  titleLines      String[]
+  tagline         String
+  description     String
+  paragraphs      String[]
+  sortOrder       Int           @default(0)
+  status          PublishStatus @default(PUBLISHED)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  companies       Company[]
+
+  @@index([status, sortOrder])
+}
+
+model Company {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name       String
+  industry   String
+  location   String
+  text       String
+  website    String
+  /// Falls back to the business card image when empty.
+  image      String?
+  logo       String?
+  linkedin   String?
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([businessId, sortOrder])
+}
+
+model Page {
+  id        String        @id @default(cuid())
+  slug      String        @unique
+  title     String
+  summary   String        @default("")
+  /// Markdown.
+  body      String
+  status    PublishStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  ARCHIVED
+}
+
+model ContactMessage {
+  id          String        @id @default(cuid())
+  enquiryType String
+  subject     String
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  /// Every submitted answer, as [{ label, value }], in form order.
+  fields      Json
+  status      MessageStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+
+  @@index([status, createdAt])
+}
+
+/// Uploaded images live in Postgres so they survive redeploys on any host.
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  mimeType  String
+  size      Int
+  data      Bytes
+  createdAt DateTime @default(now())
+}

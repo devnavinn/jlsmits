@@ -1,7 +1,7 @@
 "use server";
 
 import { getEnquiryType } from "@/lib/contact";
-import { sendMail } from "@/lib/mailer";
+import { prisma } from "@/lib/db";
 
 export type EnquiryState = {
   status: "idle" | "success" | "error";
@@ -45,20 +45,22 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
     return { status: "error", message: "Please check the highlighted fields.", errors, values };
   }
 
-  const oneLine = (s: string) => s.replace(/[\r\n]+/g, " ");
-  const text = [
-    `New ${type.subject.toLowerCase()} from the JLSmith Group website`,
-    "",
-    ...type.fields.filter((f) => values[f.name]).map((f) => `${f.label}:\n${values[f.name]}\n`),
-  ].join("\n");
-
-  const sent = await sendMail({
-    subject: oneLine(`${type.subject} — ${values.name}${values.company ? ` (${values.company})` : ""}`),
-    text,
-    replyTo: values.email,
-  });
-
-  if (!sent) {
+  try {
+    await prisma.contactMessage.create({
+      data: {
+        enquiryType: type.slug,
+        subject: type.subject,
+        name: values.name,
+        email: values.email,
+        phone: values.phone || null,
+        company: values.company || null,
+        fields: type.fields
+          .filter((f) => values[f.name])
+          .map((f) => ({ label: f.label, value: values[f.name] })),
+      },
+    });
+  } catch (err) {
+    console.error("[contact] Could not save enquiry", err);
     return {
       status: "error",
       message: "Sorry, we couldn't send your enquiry right now. Please try again or email info@jlsmiths.com.",

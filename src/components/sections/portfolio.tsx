@@ -5,18 +5,12 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { ArrowButton, Eyebrow } from "@/components/shared";
-import { businesses } from "@/lib/data";
-import { businessPages } from "@/lib/business-pages";
+import type { BusinessPageData } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const DURATION = 6000;
 
-const businessHref = (tab: string) => {
-  const page = businessPages.find((p) => p.label === tab);
-  return page ? `/${page.slug}` : "/business";
-};
-
-export function Portfolio() {
+export function Portfolio({ businesses }: { businesses: BusinessPageData[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const item = businesses[active];
@@ -25,7 +19,9 @@ export function Portfolio() {
     if (paused) return;
     const t = setTimeout(() => setActive((a) => (a + 1) % businesses.length), DURATION);
     return () => clearTimeout(t);
-  }, [active, paused]);
+  }, [active, paused, businesses.length]);
+
+  if (!item) return null;
 
   return (
     <section id="business" className="pt-8 md:pt-16">
@@ -55,14 +51,14 @@ export function Portfolio() {
         <div className="relative isolate h-[560px] overflow-hidden bg-[radial-gradient(ellipse_at_70%_40%,#8a8f96_0%,#5d636b_40%,#2b3038_100%)] md:h-[620px] lg:h-[680px]">
           <AnimatePresence mode="popLayout">
             <motion.div
-              key={item.image}
+              key={item.cardImage}
               initial={{ opacity: 0, x: 60, scale: 1.05 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-y-0 right-0 -z-10 w-full md:w-[62%] [mask-image:linear-gradient(to_right,transparent,black_30%)]"
             >
-              <Image src={item.image} alt={item.title} fill sizes="(min-width:768px) 62vw, 100vw" className="object-cover object-center" />
+              <Image src={item.cardImage} alt={item.cardTitle} fill sizes="(min-width:768px) 62vw, 100vw" className="object-cover object-center" />
             </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#22272e]/90 via-[#2a2f37]/30 to-transparent" />
@@ -71,7 +67,7 @@ export function Portfolio() {
           <div className="container-x flex h-full flex-col justify-start pt-16 md:justify-center md:pb-24 md:pt-0">
             <AnimatePresence mode="wait">
               <motion.div
-                key={item.tab}
+                key={item.slug}
                 initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -16, filter: "blur(8px)" }}
@@ -79,9 +75,9 @@ export function Portfolio() {
                 className="max-w-2xl text-white"
               >
                 <p className="font-mono text-sm uppercase tracking-[0.2em] text-white/90">{item.brand}</p>
-                <h3 className="mt-2 text-3xl font-medium leading-tight tracking-tight md:text-5xl">{item.title}</h3>
-                <p className="mt-4 text-base leading-relaxed text-white/85 md:text-lg">{item.description}</p>
-                <ArrowButton href={businessHref(item.tab)} className="mt-8">Discover More</ArrowButton>
+                <h3 className="mt-2 text-3xl font-medium leading-tight tracking-tight md:text-5xl">{item.cardTitle}</h3>
+                <p className="mt-4 text-base leading-relaxed text-white/85 md:text-lg">{item.cardDescription}</p>
+                <ArrowButton href={`/${item.slug}`} className="mt-8">Discover More</ArrowButton>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -96,7 +92,7 @@ export function Portfolio() {
           >
             {businesses.map((b, i) => (
               <button
-                key={b.tab}
+                key={b.slug}
                 role="tab"
                 aria-selected={i === active}
                 onClick={() => setActive(i)}
@@ -117,7 +113,7 @@ export function Portfolio() {
                     />
                   )}
                 </span>
-                <span className="block max-w-[9rem]">{b.tab}</span>
+                <span className="block max-w-[9rem]">{b.label}</span>
               </button>
             ))}
           </div>

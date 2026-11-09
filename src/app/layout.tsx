@@ -14,6 +14,9 @@ const mono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+// Content is edited in /admin, so pages read the database per request instead of at build time.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "JLSmith Group — Building the Foundations of Tomorrow's Industries",
   description:

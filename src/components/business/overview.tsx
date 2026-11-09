@@ -10,11 +10,9 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 import { ArrowButton, Eyebrow } from "@/components/shared";
 import { RevealHeading } from "@/components/about/ui";
 import { PageHero } from "@/components/page-hero";
-import { businessPages } from "@/lib/business-pages";
+import type { BusinessPageData } from "@/lib/content";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-
-const allCompanies = businessPages.flatMap((p) => p.companies);
 
 export function BusinessOverviewHero() {
   return (
@@ -27,14 +25,15 @@ export function BusinessOverviewHero() {
   );
 }
 
-const stats = [
-  { value: businessPages.length, suffix: "", label: "Business verticals" },
-  { value: allCompanies.length, suffix: "", label: "Group companies" },
+const buildStats = (pages: BusinessPageData[]) => [
+  { value: pages.length, suffix: "", label: "Business verticals" },
+  { value: pages.reduce((n, p) => n + p.companies.length, 0), suffix: "", label: "Group companies" },
   { value: 4, suffix: "", label: "Countries of operation", note: "India · China · UAE · USA" },
   { value: 1978, start: 1940, suffix: "", label: "Our journey began" },
 ];
 
-export function BusinessOverviewIntro() {
+export function BusinessOverviewIntro({ pages }: { pages: BusinessPageData[] }) {
+  const stats: { value: number; start?: number; suffix: string; label: string; note?: string }[] = buildStats(pages);
   return (
     <section className="py-20 md:py-28">
       <div className="container-x">
@@ -85,11 +84,11 @@ export function BusinessOverviewIntro() {
 }
 
 /** Stacked business cards: on desktop each card pins under the previous one as you scroll. */
-export function BusinessDirectory() {
+export function BusinessDirectory({ pages }: { pages: BusinessPageData[] }) {
   return (
     <section className="pb-20 md:pb-28">
       <div className="container-x">
-        {businessPages.map((b, i) => (
+        {pages.map((b, i) => (
           <div
             key={b.slug}
             className="pb-6 md:sticky md:pb-10"
@@ -160,8 +159,8 @@ export function BusinessDirectory() {
   );
 }
 
-export function CompanyLogos() {
-  const withLogos = allCompanies.filter((c) => c.logo);
+export function CompanyLogos({ pages }: { pages: BusinessPageData[] }) {
+  const withLogos = pages.flatMap((p) => p.companies).filter((c) => c.logo);
   if (withLogos.length === 0) return null;
   return (
     <section className="border-y border-black/5 bg-paper py-14 md:py-20">

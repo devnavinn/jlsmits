@@ -1,5 +1,3 @@
-import { businessPages } from "@/lib/business-pages";
-
 export const CONTACT_EMAIL = "info@jlsmiths.com";
 
 export type FieldDef = {
@@ -28,7 +26,15 @@ export type EnquiryType = {
   fields: FieldDef[];
 };
 
-const businessOptions = [...businessPages.map((b) => b.label), "Not sure yet"];
+const businessAreas = [
+  "Advanced Materials",
+  "Industrial Solutions",
+  "Technology & Digital",
+  "Commerce & Consumer",
+  "International Operations",
+];
+
+const businessOptions = [...businessAreas, "Not sure yet"];
 
 const contactFields: FieldDef[] = [
   { name: "name", label: "Full name", type: "text", required: true, placeholder: "Your name" },
@@ -175,7 +181,7 @@ export const enquiryTypes: EnquiryType[] = [
         type: "select",
         required: true,
         full: true,
-        options: ["JLSmith Group overview", ...businessPages.map((b) => `${b.label} brochure`)],
+        options: ["JLSmith Group overview", ...businessAreas.map((b) => `${b} brochure`)],
       },
     ],
   },

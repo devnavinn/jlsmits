@@ -79,8 +79,9 @@ export function Footer() {
         <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm sm:flex-row sm:items-center sm:gap-8">
           <p>© {new Date().getFullYear()} JLSmith Group. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="#" className="underline underline-offset-4 hover:text-white">Privacy Policy</Link>
-            <Link href="#" className="underline underline-offset-4 hover:text-white">Terms of Service</Link>
+            <Link href="/privacy-policy" className="underline underline-offset-4 hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="underline underline-offset-4 hover:text-white">Terms of Service</Link>
+            <Link href="/cookie-policy" className="underline underline-offset-4 hover:text-white">Cookie Policy</Link>
           </div>
         </div>
       </div>

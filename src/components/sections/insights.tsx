@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ArrowButton, Eyebrow } from "@/components/shared";
-import { articles, images } from "@/lib/data";
+import type { ArticleCard } from "@/lib/content";
 
 function Meta({ category, date }: { category: string; date: string }) {
   return (
@@ -16,8 +16,9 @@ function Meta({ category, date }: { category: string; date: string }) {
   );
 }
 
-export function Insights() {
+export function Insights({ articles }: { articles: ArticleCard[] }) {
   const [featured, ...rest] = articles;
+  if (!featured) return null;
 
   return (
     <section id="insights" className="py-20 md:py-28">
@@ -36,7 +37,7 @@ export function Insights() {
               Explore expert perspectives, industry trends, and technical breakthroughs shaping a smarter,
               cleaner energy future.
             </p>
-            <ArrowButton href="#">View All Articles</ArrowButton>
+            <ArrowButton href="/insights">View All Articles</ArrowButton>
           </BlurFade>
         </div>
 
@@ -48,7 +49,7 @@ export function Insights() {
               className="group relative grid h-full gap-6 overflow-hidden rounded-2xl border border-black/10 bg-paper p-4 sm:grid-cols-[1fr_1.1fr] md:p-6"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-[420px]">
-                <Image src={featured.image} alt={featured.title} fill sizes="(min-width:1024px) 25vw, 90vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={featured.coverImage} alt={featured.title} fill sizes="(min-width:1024px) 25vw, 90vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="flex flex-col py-1">
                 <Meta category={featured.category} date={featured.date} />
@@ -57,14 +58,18 @@ export function Insights() {
                 </h3>
                 <p className="mt-6 text-[15px] leading-snug text-ink/80">{featured.excerpt}</p>
                 <div className="mt-auto pt-8">
-                  <div className="flex items-center gap-3 border-t border-black/10 pt-6">
-                    <Image src={images.author} alt={featured.author!.name} width={48} height={48} className="size-12 rounded-md object-cover" />
-                    <div>
-                      <p className="text-base">{featured.author!.name}</p>
-                      <p className="text-sm text-ink/70">{featured.author!.role}</p>
+                  {featured.authorName && (
+                    <div className="flex items-center gap-3 border-t border-black/10 pt-6">
+                      {featured.authorImage && (
+                        <Image src={featured.authorImage} alt={featured.authorName} width={48} height={48} className="size-12 rounded-md object-cover" />
+                      )}
+                      <div>
+                        <p className="text-base">{featured.authorName}</p>
+                        <p className="text-sm text-ink/70">{featured.authorRole}</p>
+                      </div>
                     </div>
-                  </div>
-                  <ArrowButton href="#" variant="brand" className="mt-6">Read More</ArrowButton>
+                  )}
+                  <ArrowButton href={`/insights/${featured.slug}`} variant="brand" className="mt-6">Read More</ArrowButton>
                 </div>
               </div>
               <BorderBeam size={120} duration={8} colorFrom="#1f14ff" colorTo="#7c74ff" />
@@ -74,20 +79,20 @@ export function Insights() {
           {/* Side list */}
           <div className="grid gap-5">
             {rest.map((a, i) => (
-              <BlurFade key={a.title} inView delay={0.15 + i * 0.05}>
+              <BlurFade key={a.slug} inView delay={0.15 + i * 0.05}>
                 <motion.article
                   whileHover={{ y: -4 }}
                   className="group grid h-full gap-5 rounded-2xl border border-black/10 bg-paper p-4 sm:grid-cols-[minmax(0,13rem)_1fr] md:p-5"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-52">
-                    <Image src={a.image} alt={a.title} fill sizes="(min-width:640px) 13rem, 90vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image src={a.coverImage} alt={a.title} fill sizes="(min-width:640px) 13rem, 90vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                   <div className="flex flex-col">
                     <Meta category={a.category} date={a.date} />
                     <h3 className="mt-3 text-xl font-medium leading-tight tracking-tight transition-colors group-hover:text-brand md:text-2xl">
                       {a.title}
                     </h3>
-                    <ArrowButton href="#" variant="outline" className="mt-6 self-start sm:mt-auto">Read More</ArrowButton>
+                    <ArrowButton href={`/insights/${a.slug}`} variant="outline" className="mt-6 self-start sm:mt-auto">Read More</ArrowButton>
                   </div>
                 </motion.article>
               </BlurFade>
