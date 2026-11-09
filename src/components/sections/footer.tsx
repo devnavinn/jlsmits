@@ -24,13 +24,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-brand brightness-150">Headquarters</h3>
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-brand brightness-150">Office</h3>
             <address className="mt-6 space-y-4 text-[15px] not-italic">
               <p className="flex gap-3">
                 <MapPin className="mt-0.5 size-4 shrink-0" />
                 <span>
-                  Vishwakarma House, Argha Ghat Road
-                  <br /> Giridih-81501, Jharkhand (INDIA)
+                  Webel More, EN 9, EN Block, Sector V
+                  <br /> Bidhannagar, Kolkata, West Bengal 700091
                 </span>
               </p>
               <a href="mailto:info@jlsmiths.com" className="flex items-center gap-3 transition-colors hover:text-white">
