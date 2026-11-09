@@ -6,9 +6,15 @@ import { AnimatePresence, motion } from "motion/react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { ArrowButton, Eyebrow } from "@/components/shared";
 import { businesses } from "@/lib/data";
+import { businessPages } from "@/lib/business-pages";
 import { cn } from "@/lib/utils";
 
 const DURATION = 6000;
+
+const businessHref = (tab: string) => {
+  const page = businessPages.find((p) => p.label === tab);
+  return page ? `/${page.slug}` : "/business";
+};
 
 export function Portfolio() {
   const [active, setActive] = useState(0);
@@ -75,7 +81,7 @@ export function Portfolio() {
                 <p className="font-mono text-sm uppercase tracking-[0.2em] text-white/90">{item.brand}</p>
                 <h3 className="mt-2 text-3xl font-medium leading-tight tracking-tight md:text-5xl">{item.title}</h3>
                 <p className="mt-4 text-base leading-relaxed text-white/85 md:text-lg">{item.description}</p>
-                <ArrowButton href="#" className="mt-8">Discover More</ArrowButton>
+                <ArrowButton href={businessHref(item.tab)} className="mt-8">Discover More</ArrowButton>
               </motion.div>
             </AnimatePresence>
           </div>

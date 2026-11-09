@@ -19,14 +19,13 @@ export const navLinks: NavLink[] = [
   { label: "About", href: "/about" },
   {
     label: "Business",
-    href: "/#business",
+    href: "/business",
     children: [
-      { label: "Advanced Heating & Thermal", href: "/advanced-heating" },
-      { label: "Advanced Materials", href: "/#business" },
-      { label: "Industrial Solutions", href: "/#business" },
-      { label: "Technology & Digital", href: "/#business" },
-      { label: "Commerce & Consumer", href: "/#business" },
-      { label: "International Operations", href: "/#business" },
+      { label: "Advanced Materials", href: "/advanced-materials" },
+      { label: "Industrial Solutions", href: "/industrial-solutions" },
+      { label: "Technology & Digital", href: "/technology-digital" },
+      { label: "Commerce & Consumer", href: "/commerce-consumer" },
+      { label: "International Operations", href: "/international-operations" },
     ],
   },
   {

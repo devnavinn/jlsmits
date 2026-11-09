@@ -101,7 +101,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/#contact"
+            href="/contact"
             className="hidden items-center gap-2 rounded-md bg-brand px-5 py-3 text-[13px] font-medium text-white transition-all hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/40 sm:flex lg:px-8"
           >
             <Phone className="size-4" /> Contact Us
@@ -165,7 +165,7 @@ export function Navbar() {
                 ))}
                 <li className="p-2 sm:hidden">
                   <Link
-                    href="/#contact"
+                    href="/contact"
                     onClick={() => setOpen(false)}
                     className="flex items-center justify-center gap-2 rounded-lg bg-brand py-3 text-sm font-medium text-white"
                   >
