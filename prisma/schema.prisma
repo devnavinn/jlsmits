@@ -136,6 +136,18 @@ model ContactMessage {
   @@index([status, createdAt])
 }
 
+/// Openings fill the position and department dropdowns on the careers page.
+model JobOpening {
+  id         String        @id @default(cuid())
+  title      String        @unique
+  department String
+  status     PublishStatus @default(DRAFT)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([status])
+}
+
 /// Uploaded images live in Postgres so they survive redeploys on any host.
 model Media {
   id        String   @id @default(cuid())

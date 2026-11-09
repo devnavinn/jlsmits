@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Building2, Factory, FileText, Inbox, LayoutDashboard, LogOut, Menu, Newspaper, X } from "lucide-react";
+import { ArrowUpRight, Briefcase, Building2, Factory, FileText, Inbox, LayoutDashboard, LogOut, Menu, Newspaper, X } from "lucide-react";
 import { logout } from "@/app/admin/actions";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +22,7 @@ const groups = [
       { href: "/admin/businesses", label: "Businesses", icon: Building2 },
       { href: "/admin/companies", label: "Companies", icon: Factory },
       { href: "/admin/pages", label: "Pages", icon: FileText },
+      { href: "/admin/careers", label: "Job openings", icon: Briefcase },
     ],
   },
 ];

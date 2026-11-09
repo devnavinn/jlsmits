@@ -4,13 +4,15 @@ import { prisma } from "@/lib/db";
 import { cn } from "@/lib/utils";
 import type { MessageStatus } from "@/generated/prisma/client";
 import { requireAdmin } from "@/lib/auth";
+import { JOB_APPLICATION } from "@/lib/contact";
 
 const PAGE_SIZE = 25;
-const tabs: { label: string; value: "" | MessageStatus }[] = [
+const tabs: { label: string; value: "" | MessageStatus | "APPLICATIONS" }[] = [
   { label: "Inbox", value: "" },
   { label: "New", value: "NEW" },
   { label: "Read", value: "READ" },
   { label: "Archived", value: "ARCHIVED" },
+  { label: "Job applications", value: "APPLICATIONS" },
 ];
 
 export default async function MessagesPage({ searchParams }: PageProps<"/admin/messages">) {
@@ -21,7 +23,9 @@ export default async function MessagesPage({ searchParams }: PageProps<"/admin/m
   const page = Math.max(1, Number(params.page) || 1);
 
   const where = {
-    status: status || { not: "ARCHIVED" as const },
+    ...(status === "APPLICATIONS"
+      ? { enquiryType: JOB_APPLICATION, status: { not: "ARCHIVED" as const } }
+      : { status: status || { not: "ARCHIVED" as const } }),
     ...(q
       ? {
           OR: [
@@ -46,7 +50,7 @@ export default async function MessagesPage({ searchParams }: PageProps<"/admin/m
 
   return (
     <>
-      <PageHeader title="Messages" description="Everything submitted through the website's contact forms.">
+      <PageHeader title="Messages" description="Everything submitted through the website's contact and careers forms.">
         <SearchBox defaultValue={q} placeholder="Search name, email, company" hidden={status ? { status } : undefined} />
       </PageHeader>
 

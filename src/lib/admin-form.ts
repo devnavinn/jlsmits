@@ -14,7 +14,7 @@ export const slugify = (value: string) =>
 
 /** Paths already used by fixed routes, which businesses and pages may not claim. */
 export const RESERVED_SLUGS = new Set([
-  "about", "admin", "api", "business", "contact", "images", "innovation-and-sustainability", "insights", "media",
+  "about", "admin", "api", "business", "careers", "contact", "images", "innovation-and-sustainability", "insights", "media",
 ]);
 
 // next/image throws on hosts missing from next.config.ts, so only allow what it can render.

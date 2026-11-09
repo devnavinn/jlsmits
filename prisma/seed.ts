@@ -2,8 +2,9 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { MIN_PASSWORD_LENGTH, hashPassword } from "../src/lib/password";
-import { articles, businesses, businessPages } from "./seed-content";
+import { articles, businesses, businessPages, jobOpenings } from "./seed-content";
 import { articleBodies, legalPages } from "./seed-documents";
+import { mediaArticles } from "./seed-media-articles";
 
 const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
@@ -46,7 +47,7 @@ async function main() {
     });
   }
 
-  for (const [i, a] of articles.entries()) {
+  for (const [i, a] of [...articles, ...mediaArticles].entries()) {
     const slug = slugify(a.title);
     if (await prisma.article.findUnique({ where: { slug } })) continue;
     const author = "author" in a ? a.author : undefined;
@@ -56,7 +57,7 @@ async function main() {
         title: a.title,
         category: a.category,
         excerpt: "excerpt" in a ? (a.excerpt ?? "") : "",
-        body: articleBodies[slug] ?? "",
+        body: "body" in a ? a.body : (articleBodies[slug] ?? ""),
         coverImage: a.image,
         authorName: author?.name,
         authorRole: author?.role,
@@ -66,6 +67,11 @@ async function main() {
         publishedAt: new Date(`${a.date} UTC`),
       },
     });
+  }
+
+  for (const opening of jobOpenings) {
+    if (await prisma.jobOpening.findUnique({ where: { title: opening.title } })) continue;
+    await prisma.jobOpening.create({ data: { ...opening, status: "PUBLISHED" } });
   }
 
   for (const page of legalPages) {

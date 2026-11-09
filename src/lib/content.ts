@@ -118,3 +118,11 @@ export async function getLatestArticles(take?: number) {
 export const getArticle = cache((slug: string) =>
   prisma.article.findFirst({ where: { slug, ...visibleArticles() } }),
 );
+
+export const getCareerOptions = cache(async () => {
+  const openings = await prisma.jobOpening.findMany({ where: { status: "PUBLISHED" }, orderBy: { title: "asc" } });
+  return {
+    positions: [...openings.map((o) => o.title), "General application"],
+    departments: [...[...new Set(openings.map((o) => o.department))].sort(), "Other"],
+  };
+});

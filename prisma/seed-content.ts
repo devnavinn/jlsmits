@@ -70,6 +70,15 @@ export const articles = [
   },
 ];
 
+// Placeholder openings. Edit or delete them in the admin panel.
+export const jobOpenings = [
+  { title: "Production Engineer", department: "Manufacturing" },
+  { title: "Process Engineer", department: "Engineering" },
+  { title: "Quality Assurance Engineer", department: "Quality" },
+  { title: "Sales Executive", department: "Sales" },
+  { title: "Operations Coordinator", department: "Operations" },
+];
+
 export type BusinessCompany = {
   name: string;
   industry: string;

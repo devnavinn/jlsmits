@@ -34,8 +34,8 @@ export const navLinks: NavLink[] = [
       { label: "Automation", href: "/innovation-and-sustainability#engineering-operational-excellence" },
     ],
   },
-  { label: "Media", href: "/insights" },
-  { label: "Careers", href: "#" },
+  { label: "Media", href: "/media" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export const innovations = [

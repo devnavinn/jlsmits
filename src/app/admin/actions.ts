@@ -279,6 +279,36 @@ export async function deletePage(data: FormData) {
   redirect("/admin/pages");
 }
 
+/* ------------------------------ Job openings ------------------------------ */
+
+export async function saveJobOpening(_prev: FormState, data: FormData): Promise<FormState> {
+  await requireAdmin();
+  const id = idOf(data);
+  const f = new FormReader(data);
+  const fields = {
+    title: f.text("title", "Job title", 120),
+    department: f.text("department", "Department", 80),
+    status: f.status(),
+  };
+  if (await prisma.jobOpening.findFirst({ where: { title: fields.title, NOT: { id } }, select: { id: true } })) {
+    f.errors.title = "Another opening already uses this title.";
+  }
+  if (f.failed) return f.failed;
+
+  if (id) await prisma.jobOpening.update({ where: { id }, data: fields });
+  else await prisma.jobOpening.create({ data: fields });
+
+  refresh();
+  redirect("/admin/careers");
+}
+
+export async function deleteJobOpening(data: FormData) {
+  await requireAdmin();
+  await prisma.jobOpening.deleteMany({ where: { id: idOf(data) } });
+  refresh();
+  redirect("/admin/careers");
+}
+
 /* -------------------------------- Messages -------------------------------- */
 
 const MESSAGE_STATUSES: MessageStatus[] = ["NEW", "READ", "ARCHIVED"];

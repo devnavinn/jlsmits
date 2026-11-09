@@ -1,5 +1,8 @@
 export const CONTACT_EMAIL = "info@jlsmiths.com";
 
+/** `enquiryType` of messages sent from the careers page. */
+export const JOB_APPLICATION = "job-application";
+
 export type FieldDef = {
   name: string;
   label: string;
