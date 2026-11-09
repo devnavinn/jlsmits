@@ -174,8 +174,8 @@ export const businessPages: BusinessPageData[] = [
     ["Products People", "Use Every Day"],
     "Creating connected commerce experiences and building brands that inspire modern consumers.",
     [
-      "Our Commerce & Consumer businesses bring the group's manufacturing and sourcing strength to everyday customers. We design and manufacture electric cooking appliances, run ecommerce and retail platforms that bring global and emerging brands to Indian consumers, and connect manufacturers and buyers through international trading and sourcing.",
-      "Smith Innovative Appliances, the maker of Smithcucina, develops electric cooking solutions that reduce dependence on LPG and improve kitchen safety. Smith Retail Ventures, through its 21GenX marketplace, combines brand incubation, digital marketing, quick commerce and omnichannel retail, while Shanghai Qianka Trading connects global suppliers with customers. Together they turn product innovation into products people can find, trust and use every day.",
+      "Our Commerce & Consumer businesses bring the group's manufacturing and sourcing strength to everyday customers. We design and manufacture electric cooking appliances, and run ecommerce and retail platforms that bring global and emerging brands to Indian consumers.",
+      "Smith Innovative Appliances, the maker of Smithcucina, develops electric cooking solutions that reduce dependence on LPG and improve kitchen safety. Smith Retail Ventures, through its 21GenX marketplace, combines brand incubation, digital marketing, quick commerce and omnichannel retail. Together they turn product innovation into products people can find, trust and use every day.",
     ],
     [
       {
@@ -195,14 +195,6 @@ export const businessPages: BusinessPageData[] = [
         location: "Kolkata",
         text: "Smith Retail Ventures Pvt Ltd (SRVPL) is the group's ecommerce, retail, and brand development company. Through its marketplace platform 21GenX, the company focuses on bringing global D2C brands, innovative products, and emerging consumer brands to Indian customers. Its business model combines marketplace operations, brand incubation, digital marketing, quick commerce, omnichannel retail, and technology-driven commerce solutions to build scalable consumer businesses.",
       },
-      {
-        name: "Shanghai Qianka Trading Co. Limited",
-        website: "https://www.smithcomposite.com",
-        industry: "International Trading & Global Sourcing",
-        location: "Shanghai, China",
-        image: "/images/business/company-shanghai-qianka.png",
-        text: "Shanghai Qianka Trading Co. Limited is the group's international trading and sourcing company, established to connect global manufacturers, suppliers, and customers. Operating from China, the company focuses on international procurement, product sourcing, trading, supplier coordination, and cross-border business development. With experience in China-based supply chains, it supports the group's global operations by facilitating efficient sourcing, commercial partnerships, and international trade opportunities.",
-      },
     ],
   ),
   fromBusiness(
@@ -211,16 +203,16 @@ export const businessPages: BusinessPageData[] = [
     ["Global Reach,", "Local Expertise"],
     "Connecting global markets through strategic partnerships, international trade, and business expansion.",
     [
-      "Our International Operations businesses take the group's companies to new markets. From Dubai and the United States, they develop cross-border partnerships, facilitate international trade, support global brand and business development, and invest in new ventures across industrial materials, manufacturing, technology and consumer businesses.",
-      "Mundrik Ventures and Mundrik Ventures LLC act as the group's bridge to the world. They identify emerging opportunities, build strategic relationships and help group companies enter new markets, with a particular focus on the United States and other global business destinations, taking a long-term approach to growth across borders.",
+      "Our International Operations businesses take the group's companies to new markets. From Dubai, Shanghai and the United States, they develop cross-border partnerships, facilitate international trade, support global brand and business development, and invest in new ventures across industrial materials, manufacturing, technology and consumer businesses.",
+      "Mundrik Ventures FZCO and Mundrik Ventures LLC act as the group's bridge to the world. They identify emerging opportunities, build strategic relationships and help group companies enter new markets, with a particular focus on the United States and other global business destinations, taking a long-term approach to growth across borders. Shanghai Qianka Trading connects global suppliers with customers through sourcing and trade from China.",
     ],
     [
       {
-        name: "Mundrik Ventures",
+        name: "Mundrik Ventures FZCO",
         website: "https://www.mundrik.com",
         industry: "Global Business Development & Strategic Investments",
         location: "Dubai",
-        text: "Mundrik Ventures is a global business development and investment-oriented business entity within JLsmith Group. It focuses on identifying emerging business opportunities, developing strategic partnerships, expanding international market presence, and supporting new ventures across industrial materials, manufacturing, technology, and consumer businesses. Through a long-term growth approach, Mundrik Ventures aims to facilitate cross-border business expansion and create new opportunities across international markets.",
+        text: "Mundrik Ventures FZCO is a global business development and investment-oriented business entity within JLsmith Group. It focuses on identifying emerging business opportunities, developing strategic partnerships, expanding international market presence, and supporting new ventures across industrial materials, manufacturing, technology, and consumer businesses. Through a long-term growth approach, Mundrik Ventures FZCO aims to facilitate cross-border business expansion and create new opportunities across international markets.",
       },
       {
         name: "Mundrik Ventures LLC",
@@ -228,6 +220,14 @@ export const businessPages: BusinessPageData[] = [
         industry: "International Business Operations & Global Expansion",
         location: "USA",
         text: "Mundrik Ventures LLC is the group's international business entity established to support global operations, commercial partnerships, and international market expansion. The company focuses on developing cross-border business opportunities, facilitating international trade, supporting global brand and business development, and building strategic relationships. It aims to serve as a platform for expanding the group's presence in international markets, particularly across the United States and other global business destinations.",
+      },
+      {
+        name: "Shanghai Qianka Trading Co. Limited",
+        website: "https://www.smithcomposite.com",
+        industry: "International Trading & Global Sourcing",
+        location: "Shanghai, China",
+        image: "/images/business/company-shanghai-qianka.png",
+        text: "Shanghai Qianka Trading Co. Limited is the group's international trading and sourcing company, established to connect global manufacturers, suppliers, and customers. Operating from China, the company focuses on international procurement, product sourcing, trading, supplier coordination, and cross-border business development. With experience in China-based supply chains, it supports the group's global operations by facilitating efficient sourcing, commercial partnerships, and international trade opportunities.",
       },
     ],
   ),
