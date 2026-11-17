@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Download, Hammer, MessageCircleMore, PencilRuler, type LucideIcon } from "lucide-react";
+import { Download, Factory, Handshake, MessagesSquare, type LucideIcon } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { enquiryTypes } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
 const icons: Record<string, LucideIcon> = {
-  remodel: Hammer,
-  "new-build": PencilRuler,
-  meet: MessageCircleMore,
+  partner: Handshake,
+  consultation: MessagesSquare,
+  visit: Factory,
   brochure: Download,
 };
 
