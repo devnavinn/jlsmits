@@ -18,7 +18,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-6 max-w-md text-[15px] leading-relaxed">
-              A Diversified Global Enterprise Delivering Advanced Materials, Manufacturing Excellence, Technology
+              A Diversified Global Enterprise Delivering Advanced Materials, Industrial Solutions, Technology
               Solutions, and Future-Focused Ventures.
             </p>
           </div>
@@ -42,7 +42,7 @@ export function Footer() {
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-brand brightness-150">Newsletter</h3>
             <p className="mt-6 text-[15px] leading-relaxed">
-              Subscribe to receive our latest research developments, system updates, and material innovation reports.
+              Get the latest insights, group updates, and news from JLSmith Group.
             </p>
             <form
               onSubmit={(e) => {

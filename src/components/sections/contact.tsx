@@ -24,9 +24,8 @@ export function Contact() {
         </BlurFade>
         <BlurFade inView delay={0.1}>
           <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-ink/85 md:text-lg">
-            From research and engineering to manufacturing and market development,
-            <br className="hidden md:block" /> we continuously look for better ways to solve problems, create
-            value and respond to a changing world.
+            Have a question, project, or partnership in mind?
+            <br className="hidden md:block" /> Get in touch, and our team will be happy to help.
           </p>
         </BlurFade>
 

@@ -11,6 +11,7 @@ export function PageHero({
   image,
   alt,
   lines,
+  eyebrow,
   subtitle,
   imageClassName,
   className,
@@ -20,6 +21,7 @@ export function PageHero({
   image: string;
   alt: string;
   lines: string[];
+  eyebrow?: string;
   subtitle?: string;
   imageClassName?: string;
   className?: string;
@@ -48,6 +50,12 @@ export function PageHero({
 
       <motion.div style={{ opacity: fade }} className="container-x flex h-full items-end pb-16 md:items-center md:pb-0 md:pt-24">
         <div>
+          {eyebrow && (
+            <p className="mb-4 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/80 md:text-xs">
+              <span className="size-1.5 rounded-full bg-brand" />
+              {eyebrow}
+            </p>
+          )}
           <RevealHeading as="h1" lines={lines} className="max-w-4xl text-white sm:text-5xl lg:text-[4rem]" />
           {subtitle && <p className="mt-4 max-w-2xl text-sm text-white/90 md:text-base">{subtitle}</p>}
           {children}
