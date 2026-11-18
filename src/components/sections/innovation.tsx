@@ -46,13 +46,14 @@ export function Innovation() {
                   whileInView="shown"
                   viewport={{ once: true, margin: "-60px" }}
                   className="relative mx-auto aspect-[350/231] w-full max-w-sm"
+                  // Clip-path reveal (not a cover overlay), so nothing can sit on top of the image on hover.
+                  // Negative insets leave room for the hover lift/scale without cropping it.
+                  variants={{
+                    hidden: { clipPath: "inset(-20% 100% -20% -20%)" },
+                    shown: { clipPath: "inset(-20% -20% -20% -20%)" },
+                  }}
+                  transition={{ duration: 1.4, ease: [0.65, 0, 0.35, 1], delay: 0.15 * i }}
                 >
-                  <motion.span
-                    aria-hidden
-                    className="absolute inset-0 z-10 origin-right bg-white transition-colors duration-500 group-hover:bg-[#fafaff]"
-                    variants={{ hidden: { scaleX: 1 }, shown: { scaleX: 0 } }}
-                    transition={{ duration: 1.4, ease: [0.65, 0, 0.35, 1], delay: 0.15 * i }}
-                  />
                   <Image
                     src={item.image}
                     alt=""

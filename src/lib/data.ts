@@ -11,6 +11,28 @@ export const images = {
 
 export type NavLink = { label: string; href: string; children?: { label: string; href: string }[] };
 
+/** External portals linked from the footer. Set the URLs in .env (NEXT_PUBLIC_* so the client footer can read them). */
+export const portalLinks = [
+  { label: "Vendor Panel", description: "Supplier registration & login", href: process.env.NEXT_PUBLIC_VENDOR_PANEL_URL || "#" },
+  { label: "Purchase Panel", description: "Procurement & purchase orders", href: process.env.NEXT_PUBLIC_PURCHASE_PANEL_URL || "#" },
+] as const;
+
+export const footerLinks = {
+  company: [
+    { label: "About", href: "/about" },
+    { label: "Innovation & Sustainability", href: "/innovation-and-sustainability" },
+    { label: "Insights", href: "/insights" },
+    { label: "Media", href: "/media" },
+    { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
+  ],
+  legal: [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Cookie Policy", href: "/cookie-policy" },
+  ],
+};
+
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },

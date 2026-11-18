@@ -86,7 +86,7 @@ export function About() {
             </h2>
           </BlurFade>
           <BlurFade inView delay={0.1}>
-            <ArrowButton href="#business">Discover our story</ArrowButton>
+            <ArrowButton href="/about">Discover our story</ArrowButton>
           </BlurFade>
         </div>
 
